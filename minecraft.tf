@@ -3,6 +3,7 @@ data "oci_identity_availability_domains" "default" {
   compartment_id = var.tenancy_ocid
 }
 
+// Create a virtual network for deploying servers
 resource "oci_core_vcn" "vcn" {
   compartment_id = var.tenancy_ocid
 
@@ -11,6 +12,7 @@ resource "oci_core_vcn" "vcn" {
   dns_label    = "minecraft"
 }
 
+// Define a gateway from which the network can reach the internet
 resource "oci_core_internet_gateway" "internet" {
   compartment_id = oci_core_vcn.vcn.compartment_id
   vcn_id         = oci_core_vcn.vcn.id
@@ -19,6 +21,7 @@ resource "oci_core_internet_gateway" "internet" {
   enabled      = true
 }
 
+// Allow traffic to be routed out to the internet
 resource "oci_core_route_table" "internet" {
   compartment_id = oci_core_vcn.vcn.compartment_id
   vcn_id         = oci_core_vcn.vcn.id
@@ -30,6 +33,8 @@ resource "oci_core_route_table" "internet" {
   }
 }
 
+// Allow all outbound traffic and inbound traffic on the Minecraft server port
+// but restrict SSH access to only this machine where Terraform is running
 resource "oci_core_security_list" "rules" {
   compartment_id = oci_core_vcn.vcn.compartment_id
   vcn_id         = oci_core_vcn.vcn.id
@@ -69,6 +74,7 @@ resource "oci_core_security_list" "rules" {
   }
 }
 
+// Create a subnet using the above routing and security rules
 resource "oci_core_subnet" "public" {
   cidr_block     = "10.0.0.0/16"
   compartment_id = oci_core_vcn.vcn.compartment_id
@@ -80,6 +86,8 @@ resource "oci_core_subnet" "public" {
   security_list_ids = [oci_core_security_list.rules.id]
 }
 
+// Deploy a single hefty Oracle Linux server and set up the software
+// dependencies and a run script to get started quickly
 resource "oci_core_instance" "server" {
   availability_domain = data.oci_identity_availability_domains.default.availability_domains[0].name
   compartment_id      = oci_core_vcn.vcn.compartment_id
