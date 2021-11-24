@@ -8,8 +8,8 @@ resource "oci_core_vcn" "vcn" {
   compartment_id = var.tenancy_ocid
 
   cidr_blocks  = ["10.0.0.0/16"]
-  display_name = "minecraft-vcn"
-  dns_label    = "minecraft"
+  display_name = "server-vcn"
+  dns_label    = "server"
 }
 
 // Define a gateway from which the network can reach the internet
@@ -33,13 +33,13 @@ resource "oci_core_route_table" "internet" {
   }
 }
 
-// Allow all outbound traffic and inbound traffic on the Minecraft server port
+// Allow all outbound traffic and inbound traffic on the game server port
 // but restrict SSH access to only this machine where Terraform is running
 resource "oci_core_security_list" "rules" {
   compartment_id = oci_core_vcn.vcn.compartment_id
   vcn_id         = oci_core_vcn.vcn.id
 
-  display_name = "minecraft-security-list"
+  display_name = "server-security-list"
   egress_security_rules {
     description = "All traffic"
     destination = "0.0.0.0/0"
@@ -97,7 +97,7 @@ resource "oci_core_instance" "server" {
     assign_public_ip = true
     subnet_id        = oci_core_subnet.public.id
   }
-  display_name = "minecraft-server"
+  display_name = "game-server"
   metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
   }

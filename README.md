@@ -1,7 +1,8 @@
-# Minecraft Server Deployment
+# Game Server Deployment
 
-A Terraform project for deploying a [Minecraft: Java Edition server][0] to
-[Oracle Cloud][1] based on the instructions given in an [Oracle blog post][2].
+A Terraform project for deploying a game like 
+[Minecraft: Java Edition server][0] to [Oracle Cloud][1] based on the 
+instructions given in an [Oracle blog post][2].
 
 ## Getting Started
 
