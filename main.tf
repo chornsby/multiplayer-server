@@ -6,7 +6,7 @@ terraform {
     }
     oci = {
       source = "hashicorp/oci"
-      version = "4.40.0"
+      version = "4.53.0"
     }
   }
 }
