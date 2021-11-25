@@ -55,21 +55,21 @@ resource "oci_core_security_list" "rules" {
     }
   }
   ingress_security_rules {
-    description = "Minecraft TCP"
+    description = "Server TCP"
     source      = "0.0.0.0/0"
     protocol    = "6"
     tcp_options {
-      max = 25565
-      min = 25565
+      max = var.open_port_max
+      min = var.open_port_min
     }
   }
   ingress_security_rules {
-    description = "Minecraft UDP"
+    description = "Server UDP"
     source      = "0.0.0.0/0"
     protocol    = "17"
     udp_options {
-      max = 25565
-      min = 25565
+      max = var.open_port_max
+      min = var.open_port_min
     }
   }
 }
