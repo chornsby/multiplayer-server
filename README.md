@@ -29,6 +29,8 @@ posts.
 - https://blogs.oracle.com/developers/post/how-to-set-up-and-run-a-really-powerful-free-minecraft-server-in-the-cloud#open-firewall-and-security-list-ports-to-allow-public-access
 - https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server
 - https://teilgedanken.de/Blog/post/setting-up-a-minecraft-server-using-systemd/
+- https://valheim.fandom.com/wiki/Hosting_Servers
+- https://pimylifeup.com/raspberry-pi-valheim-server/
 
 [0]: https://www.minecraft.net/en-us/download/server
 [1]: https://www.oracle.com/cloud/
