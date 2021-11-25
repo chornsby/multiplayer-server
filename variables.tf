@@ -23,6 +23,11 @@ variable "region" {
   type        = string
 }
 
+variable "setup_script_path" {
+  description = "The shell script used to provision the server"
+  type        = string
+}
+
 variable "ssh_public_key_path" {
   description = "Your own SSH public key used to access the server"
   type        = string

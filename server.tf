@@ -111,13 +111,8 @@ resource "oci_core_instance" "server" {
     source_type = "image"
   }
 
-  // TODO: Continue improving using tricks from:
-  //  https://teilgedanken.de/Blog/post/setting-up-a-minecraft-server-using-systemd/
   provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get upgrade --assume-yes",
-    ]
+    script = var.setup_script_path
 
     connection {
       host = self.public_ip
