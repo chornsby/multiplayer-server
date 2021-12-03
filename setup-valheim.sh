@@ -45,5 +45,6 @@ popd
 # Allow incoming connections on game server ports
 sudo iptables --insert INPUT --protocol tcp --destination-port $PORT_MIN:$PORT_MAX --jump ACCEPT
 sudo iptables --insert INPUT --protocol udp --destination-port $PORT_MIN:$PORT_MAX --jump ACCEPT
+sudo iptables-save
 
 # TODO: Copy and rewrite start-server.sh to customise password etc
