@@ -1,0 +1,9 @@
+[Unit]
+Description=Schedule a backup every 1 hour
+
+[Timer]
+OnCalendar=*-*-* *:00:00
+Unit=valheim-backup.service
+
+[Install]
+WantedBy=timers.target

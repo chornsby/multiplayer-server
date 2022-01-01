@@ -1,0 +1,18 @@
+[Unit]
+Description=Valheim Game Server
+After=network-online.target syslog.target
+Wants=network.target
+
+[Service]
+Type=simple
+Environment=SteamAppId=892970
+Environment=LD_LIBRARY_PATH=/home/ubuntu/valheim_server/linux64:$LD_LIBRARY_PATH
+ExecStart=/home/ubuntu/valheim_server/valheim_server.x86_64 -batchmode -name "{{ valheim_name }}"  -nographics -password "{{ valheim_password }}"  -port {{ valheim_port.default }} -public 0 -savedir valheim_data -world "{{ valheim_name }}"
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=30
+User=ubuntu
+WorkingDirectory=/home/ubuntu
+
+[Install]
+WantedBy=default.target

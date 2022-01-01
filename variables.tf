@@ -3,6 +3,17 @@ variable "fingerprint" {
   type        = string
 }
 
+variable "game_server_name" {
+  description = "The human-readable name for the game and server"
+  type        = string
+}
+
+variable "game_server_password" {
+  description = "The password used by players to access the game"
+  sensitive   = true
+  type        = string
+}
+
 variable "open_port_max" {
   description = "The highest port to open for incoming game server connections"
   type        = number
@@ -20,11 +31,6 @@ variable "oracle_private_key_path" {
 
 variable "region" {
   description = "The Oracle Cloud region to deploy the server"
-  type        = string
-}
-
-variable "setup_script_path" {
-  description = "The shell script used to provision the server"
   type        = string
 }
 

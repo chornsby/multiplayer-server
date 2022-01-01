@@ -1,0 +1,10 @@
+dependencies:
+  - role: emulator
+    vars:
+      project: box64
+      version: "{{ box64_version }}"
+  - role: emulator
+    vars:
+      project: box86
+      version: "{{ box86_version }}"
+  - role: steamcmd

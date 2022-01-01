@@ -1,0 +1,27 @@
+- name: Install system libraries
+  become: yes
+  apt:
+    pkg: zip
+    state: present
+
+- name: Create backup script
+  ansible.builtin.copy:
+    src: make-backup.sh
+    dest: make-backup.sh
+    mode: "0755"
+
+- name: Create systemd unit file
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+  loop:
+    - valheim-backup.service
+    - valheim-backup.timer
+
+- name: Ensure valheim backup timer is enabled
+  become: yes
+  ansible.builtin.systemd:
+    name: valheim-backup.timer
+    enabled: yes
+    state: started

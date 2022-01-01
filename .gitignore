@@ -1,4 +1,7 @@
 *.pem
 *.tfvars
 .terraform*
+.venv
+backups
+inventory
 terraform.tfstate*

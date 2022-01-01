@@ -98,7 +98,7 @@ resource "oci_core_instance" "server" {
     subnet_id        = oci_core_subnet.public.id
   }
   display_name = "game-server"
-  metadata = {
+  metadata     = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
   }
   shape_config {
@@ -110,18 +110,28 @@ resource "oci_core_instance" "server" {
     source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaarszpq7ymdbzc7qoultyf4wliee4flk34mw4ux263skueksm7lfxa"
     source_type = "image"
   }
-
-  provisioner "remote-exec" {
-    script = var.setup_script_path
-
-    connection {
-      host = self.public_ip
-      type = "ssh"
-      user = "ubuntu"
-    }
-  }
 }
 
-output "instance-ip" {
+// Create an Ansible inventory file pointing to the public IP of the server
+resource "local_file" "inventory" {
+  filename = "inventory"
+  content  = jsonencode({
+    all = {
+      hosts = {
+        (oci_core_instance.server.public_ip) = {
+          ansible_user     = "ubuntu",
+          valheim_name     = var.game_server_name,
+          valheim_password = var.game_server_password
+        }
+      }
+    }
+  })
+}
+
+output "server-ip" {
   value = oci_core_instance.server.public_ip
+}
+
+output "server-user" {
+  value = "ubuntu"
 }

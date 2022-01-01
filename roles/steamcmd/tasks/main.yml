@@ -1,0 +1,15 @@
+- name: Download steamcmd
+  ansible.builtin.get_url:
+    dest: ./steamcmd_linux.tar.gz
+    url: https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
+  register: download_steamcmd
+
+- name: Create steamcmd folder
+  ansible.builtin.file:
+    path: steamcmd
+    state: directory
+
+- name: Unpack steamcmd
+  command:
+    cmd: tar zxvf steamcmd_linux.tar.gz --directory steamcmd
+  when: download_steamcmd.changed
