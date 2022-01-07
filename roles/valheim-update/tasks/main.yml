@@ -4,6 +4,13 @@
     name: valheim
     state: stopped
 
+- name: Update system libraries
+  become: yes
+  ansible.builtin.apt:
+    name: "*"
+    state: latest
+    update_cache: yes
+
 - name: Update valheim server
   command:
     cmd: >
