@@ -38,6 +38,8 @@ posts.
 - https://pimylifeup.com/raspberry-pi-valheim-server/
 - https://fedoramagazine.org/systemd-timers-for-scheduling-tasks/
 - https://www.reddit.com/r/valheim/comments/lqfx2o/dedicated_server_on_linux_as_service/
+- https://docs.oracle.com/en-us/iaas/Content/Security/Reference/compute_security.htm#Securing_Compute__network-access
+- https://blog.meinside.dev/When-Oracle-Clouds-Ubuntu-Instance-Doesnt-Accept-Connections-to-Ports-Other-than-22/
 
 [0]: https://www.minecraft.net/en-us/download/server
 [1]: https://www.oracle.com/cloud/

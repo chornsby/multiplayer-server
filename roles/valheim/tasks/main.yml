@@ -11,6 +11,12 @@
     - tcp
     - udp
 
+- name: Persist firewall rules
+  become: yes
+  community.general.iptables_state:
+    path: /etc/iptables/rules.v4
+    state: saved
+
 - name: Create systemd unit file
   become: yes
   ansible.builtin.template:
