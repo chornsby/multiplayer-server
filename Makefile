@@ -9,6 +9,14 @@ backup:
 install: .venv/bin/ansible-playbook
 	.venv/bin/ansible-playbook --inventory inventory valheim-install.yml
 
+.PHONY: show-connections
+show-connections:
+	ssh $(SERVER_USER)@$(SERVER_IP) 'journalctl --unit valheim --grep Connections --lines 1 --output cat --reverse'
+
+.PHONY: show-status
+show-status:
+	ssh $(SERVER_USER)@$(SERVER_IP) 'systemctl status valheim'
+
 .PHONY: terraform
 terraform:
 	terraform apply
