@@ -9,6 +9,11 @@ backup:
 install: .venv/bin/ansible-playbook
 	.venv/bin/ansible-playbook --inventory inventory valheim-install.yml
 
+.PHONY: reboot
+reboot: backup
+	ssh $(SERVER_USER)@$(SERVER_IP) 'sudo systemctl stop valheim'
+	ssh $(SERVER_USER)@$(SERVER_IP) 'sudo systemctl reboot'
+
 .PHONY: show-connections
 show-connections:
 	ssh $(SERVER_USER)@$(SERVER_IP) 'journalctl --unit valheim --grep Connections --lines 1 --output cat --reverse'
