@@ -4,6 +4,7 @@ SERVER_USER := $(shell terraform output -raw server-user)
 .PHONY: backup
 backup:
 	rsync --recursive --verbose $(SERVER_USER)@$(SERVER_IP):backups .
+	find backups/ -name '*.zip' -type f | sort --reverse | tail --lines +6 | xargs -I {} rm -- {}
 
 .PHONY: install
 install: .venv/bin/ansible-playbook
