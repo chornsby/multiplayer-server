@@ -98,7 +98,7 @@ resource "oci_core_instance" "server" {
     subnet_id        = oci_core_subnet.public.id
   }
   display_name = "game-server"
-  metadata     = {
+  metadata = {
     ssh_authorized_keys = file(var.ssh_public_key_path)
   }
   shape_config {
@@ -115,7 +115,7 @@ resource "oci_core_instance" "server" {
 // Create an Ansible inventory file pointing to the public IP of the server
 resource "local_file" "inventory" {
   filename = "inventory"
-  content  = jsonencode({
+  content = jsonencode({
     all = {
       hosts = {
         (oci_core_instance.server.public_ip) = {
