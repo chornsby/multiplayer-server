@@ -24,5 +24,5 @@ provider "oci" {
 }
 
 data "http" "icanhazip" {
-  url = "https://icanhazip.com"
+  url = "https://ipv4.icanhazip.com"
 }
