@@ -1,3 +1,7 @@
 dependencies:
   - role: emulator-box64
+  - role: open-ports
+    vars:
+      ports:
+        - "{{ valheim_port.min }}:{{ valheim_port.max }}"
   - role: steamcmd

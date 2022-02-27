@@ -1,22 +1,3 @@
-- name: Open firewall
-  become: yes
-  ansible.builtin.iptables:
-    action: insert
-    chain: INPUT
-    protocol: "{{ item }}"
-    destination_ports:
-      - "{{ valheim_port.min }}:{{ valheim_port.max }}"
-    jump: ACCEPT
-  loop:
-    - tcp
-    - udp
-
-- name: Persist firewall rules
-  become: yes
-  community.general.iptables_state:
-    path: /etc/iptables/rules.v4
-    state: saved
-
 - name: Create systemd unit file
   become: yes
   ansible.builtin.template:

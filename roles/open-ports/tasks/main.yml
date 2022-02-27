@@ -1,0 +1,16 @@
+- name: Open firewall
+  become: yes
+  ansible.builtin.iptables:
+    action: insert
+    chain: INPUT
+    protocol: "{{ item.0 }}"
+    destination_ports:
+      - "{{ item.1 }}"
+    jump: ACCEPT
+  loop: "{{ protocols|product(ports)|list }}"
+
+- name: Persist firewall rules
+  become: yes
+  community.general.iptables_state:
+    path: /etc/iptables/rules.v4
+    state: saved
