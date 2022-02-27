@@ -1,0 +1,5 @@
+dependencies:
+  - role: emulator
+    vars:
+      project: box64
+      version: v0.1.6

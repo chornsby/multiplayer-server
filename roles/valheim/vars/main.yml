@@ -1,5 +1,3 @@
-box64_version: v0.1.6
-box86_version: v0.2.4
 valheim_port:
   default: 2456
   min: 2456
