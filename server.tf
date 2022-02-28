@@ -54,22 +54,28 @@ resource "oci_core_security_list" "rules" {
       min = 22
     }
   }
-  ingress_security_rules {
-    description = "Server TCP"
-    source      = "0.0.0.0/0"
-    protocol    = "6"
-    tcp_options {
-      max = var.open_port_max
-      min = var.open_port_min
+  dynamic "ingress_security_rules" {
+    for_each = var.open_ports
+    content {
+      description = "Server TCP"
+      source      = "0.0.0.0/0"
+      protocol    = "6"
+      tcp_options {
+        max = ingress_security_rules.value
+        min = ingress_security_rules.value
+      }
     }
   }
-  ingress_security_rules {
-    description = "Server UDP"
-    source      = "0.0.0.0/0"
-    protocol    = "17"
-    udp_options {
-      max = var.open_port_max
-      min = var.open_port_min
+  dynamic "ingress_security_rules" {
+    for_each = var.open_ports
+    content {
+      description = "Server UDP"
+      source      = "0.0.0.0/0"
+      protocol    = "17"
+      udp_options {
+        max = ingress_security_rules.value
+        min = ingress_security_rules.value
+      }
     }
   }
 }

@@ -14,14 +14,9 @@ variable "game_server_password" {
   type        = string
 }
 
-variable "open_port_max" {
-  description = "The highest port to open for incoming game server connections"
-  type        = number
-}
-
-variable "open_port_min" {
-  description = "The lowest port to open for incoming game server connections"
-  type        = number
+variable "open_ports" {
+  description = "The ports to open for incoming game server connections"
+  type        = set(number)
 }
 
 variable "oracle_private_key_path" {
