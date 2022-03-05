@@ -2,4 +2,4 @@ dependencies:
   - role: emulator
     vars:
       project: box86
-      version: v0.2.4
+      version: 7d4154e0d49b229ea82149e72e26c54849369ab5
