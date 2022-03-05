@@ -16,7 +16,7 @@
     cmd: >
       ./steamcmd/steamcmd.sh 
         +@sSteamCmdForcePlatformType linux 
-        +force_install_dir valheim_server 
+        +force_install_dir $HOME/valheim_server 
         +login anonymous 
         +app_update 896660 validate 
         +quit
