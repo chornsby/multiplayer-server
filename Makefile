@@ -32,7 +32,7 @@ update: .venv/bin/ansible-playbook
 	.venv/bin/ansible-playbook --inventory inventory valheim-update.yml
 
 .venv:
-	python -m venv .venv
+	python3 -m venv .venv
 	.venv/bin/pip install --upgrade pip setuptools wheel
 
 .venv/bin/ansible-playbook: .venv
