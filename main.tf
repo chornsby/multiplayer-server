@@ -2,15 +2,15 @@ terraform {
   required_providers {
     http = {
       source  = "hashicorp/http"
-      version = "2.1.0"
+      version = "3.2.1"
     }
     local = {
       source  = "hashicorp/local"
-      version = "2.1.0"
+      version = "2.3.0"
     }
     oci = {
-      source  = "hashicorp/oci"
-      version = "4.61.0"
+      source  = "oracle/oci"
+      version = "4.103.0"
     }
   }
 }
