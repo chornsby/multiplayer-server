@@ -4,20 +4,37 @@
     src: valheim.service
     dest: /etc/systemd/system/valheim.service
 
-- name: Check if server installed
-  ansible.builtin.stat:
-    path: valheim_server
-    get_checksum: no
-  register: valheim_server
+- name: Create update script
+  ansible.builtin.copy:
+    src: do-update.sh
+    dest: do-update.sh
+    mode: "0755"
 
-- name: Install valheim server
-  include_role:
-    name: valheim-update
-  when: not valheim_server.stat.exists
+- name: Create systemd unit file
+  become: yes
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+  loop:
+    - valheim-update.service
+    - valheim-update.timer
 
-- name: Ensure valheim service is enabled and running
+- name: Ensure valheim update timer is enabled
+  become: yes
+  ansible.builtin.systemd:
+    name: valheim-update.timer
+    enabled: yes
+    state: started
+
+- name: Ensure valheim service is enabled
   become: yes
   ansible.builtin.systemd:
     name: valheim
     enabled: yes
+    state: stopped
+
+- name: Run valheim update
+  become: yes
+  ansible.builtin.systemd:
+    name: valheim-update
     state: started

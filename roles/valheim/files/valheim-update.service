@@ -1,0 +1,8 @@
+[Unit]
+Description=Valheim Update
+
+[Service]
+Type=oneshot
+ExecStart=/home/ubuntu/do-update.sh
+User=ubuntu
+WorkingDirectory=/home/ubuntu

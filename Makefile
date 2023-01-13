@@ -28,8 +28,8 @@ terraform:
 	terraform apply
 
 .PHONY: update
-update: .venv/bin/ansible-playbook
-	.venv/bin/ansible-playbook --inventory inventory valheim-update.yml
+update:
+	ssh ${SERVER_USER}@${SERVER_IP} 'bash do-update.sh'
 
 .venv:
 	python3 -m venv .venv

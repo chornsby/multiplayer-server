@@ -1,5 +1,0 @@
-- name: Valheim server playbook
-  gather_facts: no
-  hosts: all
-  roles:
-    - valheim-update

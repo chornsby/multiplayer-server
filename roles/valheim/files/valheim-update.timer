@@ -1,0 +1,9 @@
+[Unit]
+Description=Restart the server every night
+
+[Timer]
+OnCalendar=*-*-* 04:00:00
+Unit=valheim-update.service
+
+[Install]
+WantedBy=timers.target
