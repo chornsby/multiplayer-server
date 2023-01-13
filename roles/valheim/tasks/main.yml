@@ -31,10 +31,3 @@
   ansible.builtin.systemd:
     name: valheim
     enabled: yes
-    state: stopped
-
-- name: Run valheim update
-  become: yes
-  ansible.builtin.systemd:
-    name: valheim-update
-    state: started
