@@ -7,8 +7,8 @@ backup:
 	find backups/valheim/ -name '*.zip' -type f | sort --reverse | tail --lines +6 | xargs -I {} rm -- {}
 
 .PHONY: install
-install: .venv/bin/ansible-playbook
-	.venv/bin/ansible-playbook --inventory inventory valheim-install.yml
+install:
+	ansible-playbook --inventory inventory valheim-install.yml
 
 .PHONY: reboot
 reboot: backup
@@ -31,9 +31,3 @@ terraform:
 update:
 	ssh ${SERVER_USER}@${SERVER_IP} 'bash do-update.sh'
 
-.venv:
-	python3 -m venv .venv
-	.venv/bin/pip install --upgrade pip setuptools wheel
-
-.venv/bin/ansible-playbook: .venv
-	.venv/bin/pip install ansible
