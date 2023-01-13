@@ -1,12 +1,13 @@
 - name: Add armhf architecture
   become: yes
-  command:
+  ansible.builtin.command:
     cmd: dpkg --add-architecture armhf
   changed_when: false
 
 - name: Install system libraries
   become: yes
-  apt:
+  ansible.builtin.apt:
+    update_cache: true
     pkg:
       - build-essential
       - cmake
@@ -15,10 +16,11 @@
       - libc6:armhf
       - libncurses5:armhf
       - libstdc++6:armhf
+      - libtinfo6:armhf
     state: present
 
 - name: Checkout emulator
-  git:
+  ansible.builtin.git:
     repo: "https://github.com/ptitSeb/{{ project }}"
     dest: "{{ project }}"
     version: "{{ version }}"
@@ -30,7 +32,7 @@
     state: directory
 
 - name: Install emulator
-  command:
+  ansible.builtin.shell:
     chdir: "{{ project }}/build"
     cmd: |
       cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo &&
