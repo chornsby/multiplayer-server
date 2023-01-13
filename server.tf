@@ -108,12 +108,12 @@ resource "oci_core_instance" "server" {
     ssh_authorized_keys = file(var.ssh_public_key_path)
   }
   shape_config {
-    memory_in_gbs = 24
-    ocpus         = 4
+    memory_in_gbs = 16
+    ocpus         = 2
   }
-  // https://docs.oracle.com/en-us/iaas/images/image/0fef99ff-3e6a-4f32-b504-28143e310475/
+  // https://docs.oracle.com/en-us/iaas/images/image/4025d18f-bd66-4bf6-833a-90b67ace0d7f/
   source_details {
-    source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaarszpq7ymdbzc7qoultyf4wliee4flk34mw4ux263skueksm7lfxa"
+    source_id   = "ocid1.image.oc1.eu-amsterdam-1.aaaaaaaacx35n5czcrq3yk65krkmwpxt36qitvfpkididysiuq7j6lde5c4q"
     source_type = "image"
   }
 }

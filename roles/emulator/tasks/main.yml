@@ -34,6 +34,6 @@
     chdir: "{{ project }}/build"
     cmd: |
       cmake .. -DRPI4ARM64=1 -DCMAKE_BUILD_TYPE=RelWithDebInfo &&
-        make --jobs 4 &&
+        make --jobs 2 &&
         sudo make install
   when: git_checkout.changed
