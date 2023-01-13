@@ -29,5 +29,5 @@ terraform:
 
 .PHONY: update
 update:
-	ssh ${SERVER_USER}@${SERVER_IP} 'bash do-update.sh'
+	ssh ${SERVER_USER}@${SERVER_IP} 'sudo systemctl start valheim-update'
 
