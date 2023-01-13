@@ -2,10 +2,7 @@
 Description=Valheim Backup
 
 [Service]
-Type=simple
+Type=oneshot
 ExecStart=/home/ubuntu/make-backup.sh
 User=ubuntu
 WorkingDirectory=/home/ubuntu
-
-[Install]
-WantedBy=default.target
