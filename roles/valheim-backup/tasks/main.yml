@@ -1,7 +1,9 @@
 - name: Install system libraries
   become: yes
-  apt:
-    pkg: zip
+  ansible.builtin.apt:
+    pkg:
+      - rsync
+      - zip
     state: present
 
 - name: Create backup script
