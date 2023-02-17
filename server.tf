@@ -47,7 +47,7 @@ resource "oci_core_security_list" "rules" {
   }
   ingress_security_rules {
     description = "Node access"
-    source      = "${chomp(data.http.icanhazip.body)}/32"
+    source      = "${chomp(data.http.icanhazip.response_body)}/32"
     protocol    = "6"
     tcp_options {
       max = 22
